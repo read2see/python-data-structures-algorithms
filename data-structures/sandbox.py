@@ -1,4 +1,5 @@
-from ds import Queue,LinkedList,DoublyLinkedList
+from ds import Queue,LinkedList,DoublyLinkedList, Stack
 
-dataStructure = DoublyLinkedList()
+dataStructure = Stack()
 
+dataStructure.pop()
