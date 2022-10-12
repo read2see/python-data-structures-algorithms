@@ -1,5 +1,8 @@
-from ds import Queue,LinkedList,DoublyLinkedList, Stack
+from ds import ArrayStack
 
-dataStructure = Stack()
+dataStructure = ArrayStack()
 
-dataStructure.pop()
+
+    
+
+
