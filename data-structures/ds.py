@@ -1,3 +1,4 @@
+from re import S
 from unittest.mock import DEFAULT
 
 
@@ -59,7 +60,7 @@ class ArrayStack:
     
     def push(self, item):
         
-        if len(self._data)  == ArrayStack.DEFAULT_CAPACITY:
+        if self._size  == len(self._data):
             self._resize(2*len(self._data))
         
         self._data.append(item)
@@ -83,49 +84,83 @@ class ArrayStack:
 class Queue:
     
     def __init__(self):
-        pass
+        self._data = []
     
     def __len__(self):
-        pass
+        return len(self._data)
     
     def is_empty(self):
-        pass
+        return len(self._data) == 0
     
     def enqueue(self, item):
-        pass
+        self._data.append(item)
     
     def dequeue(self):
-        pass
+        if self.is_empty():
+            raise Exception("Queue is empty")
+        
+        item = self._data[0]
+        
+        self._data.remove(self._data[0])
+        
+        return item
+        
+            
     
     def first(self):
-        pass
-    
-    def tail(self):
-        pass
+        if self.is_empty():
+            raise Exception("Queue is empty")
+        
+        return self._data[0]
     
 
 class ArrayQueue:
     
+    DEFAULT_CAPACITY = 10
     def __init__(self):
-        pass
+        
+        self._data = [None]*self.DEFAULT_CAPACITY
+        self._size = 0
+        
     
     def __len__(self):
-        pass
+        return self._size
     
     def is_empty(self):
-        pass
+        return self._size == 0
     
     def enqueue(self, item):
-        pass
+        
+        if self._size == len(self._data):
+            self._resize(2*len(self._data))
+        endOfQueue = self._size % len(self._data)
+        self._data[endOfQueue] = item
+        self._size += 1
     
     def dequeue(self):
-        pass
+        
+        if self.is_empty():
+            raise Exception("Queue is empty")
+        
+        item = self._data[0]
+        self._data.remove(item)
+        self._data = self._data + [None]
+        
+        return item
     
     def first(self):
-        pass
+        if self.is_empty():
+            raise Exception("Queue is empty")
+        
+        return self._data[0]
     
-    def tail(self):
-        pass
+    def _resize(self, multiplier):
+        
+        tempData = self._data
+        self._data = [None]*multiplier
+        
+        for i in range(len(tempData)):
+            self._data[i] = tempData[i]
     
 class LinkedListStack:
     
